@@ -1,15 +1,32 @@
-version: '3.7'
-
 services:
-  rustdesk:
-    image: rustdesk/rustdesk-server
-    container_name: rustdesk
+  hbbs:
+    container_name: hbbs
+    image: rustdesk/rustdesk-server:latest
+    environment:
+      - ALWAYS_USE_RELAY=Y
+    command: hbbs
     ports:
-      - "21115:21115"
-      - "21116:21116"
-      - "21116:21116/udp"
-      - "21118:21118"
+     - "21115:21115"
+     - "21116:21116"
+     - "21116:21116/udp"
+     - "21118:21118"
     volumes:
-      - /share/CACHEDEV1_DATA/Container/rustdesk:/root:rw
-    command: /root/rustdesk-server
+      - /share/CACHEDEV1_DATA/Container/rustdeskserverhbbs:/root
+    network_mode: "host"
+
+    depends_on:
+      - hbbr
     restart: unless-stopped
+
+  hbbr:
+    container_name: hbbr
+    image: rustdesk/rustdesk-server:latest
+    command: hbbr
+    ports:
+      - 21117:21117
+      - 21119:21119
+    volumes:
+      - /share/CACHEDEV1_DATA/Container/rustdeskhbbr:/root
+    network_mode: "host"
+    restart: unless-stopped
+
