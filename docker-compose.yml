@@ -11,4 +11,5 @@ services:
       - "21118:21118"
     volumes:
       - /share/CACHEDEV1_DATA/Container/rustdesk:/root:rw
+    command: /root/rustdesk-server
     restart: unless-stopped
