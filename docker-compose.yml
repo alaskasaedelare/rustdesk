@@ -16,19 +16,4 @@ services:
       - /share/CACHEDEV1_DATA/Container/rustdeskhbbs:/root:rw
     networks:
       - rustdesk-net
-    depends_on:
-      - hbbr
-    restart: on-failure:5
-
-  hbbr:
-    container_name: HBBR
-    ports:
-      - 21117:21117
-      - 21119:21119
-    image: rustdesk/rustdesk-server
-    command: hbbr
-    volumes:
-      - share/CACHEDEV1_DATA/Container/rustdeskhbbr:/root:rw
-    networks:
-      - rustdesk-net
     restart: on-failure:5
